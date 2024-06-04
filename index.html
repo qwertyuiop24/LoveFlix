@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Monthsary!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;500;700&family=Dancing+Script:wght@700&display=swap');
+
+        body {
+            margin: 0;
+            font-family: 'Raleway', sans-serif;
+            background-color: #141414;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            background-image: url('https://www.transparenttextures.com/patterns/dark-denim.png');
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .header {
+            width: 100%;
+            padding: 20px;
+            background-color: #e50914;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 700;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 100px 0;
+            padding-top: 60px;
+        }
+
+        .message {
+            font-size: 1.5em;
+            line-height: 1.6;
+            margin: 20px 0;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .slideshow-container {
+            max-width: 1000px;
+            position: relative;
+            margin: auto;
+        }
+
+        .mySlides {
+            display: none;
+            padding: 20px;
+        }
+
+        img {
+            vertical-align: middle;
+            width: 80%;
+            max-width: 300px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            margin: 0 auto;
+        }
+
+        .dots {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .dot {
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .active {
+            background-color: #e50914;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 1em;
+            color: #bbb;
+        }
+
+        .footer a {
+            color: #e50914;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .heart-button {
+            background: linear-gradient(45deg, #e50914, #ff6f61);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1.5em;
+            border-radius: 50%;
+            cursor: pointer;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: background 0.3s ease, transform 0.3s ease;
+            position: relative;
+            z-index: 100;
+        }
+
+        .heart-button:hover {
+            background: linear-gradient(45deg, #ff6f61, #e50914);
+            transform: scale(1.1);
+        }
+
+        .quote-container {
+            display: none;
+            font-size: 1.5em;
+            color: #e50914;
+            font-family: 'Dancing Script', cursive;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            max-width: 80%;
+            margin: 20px auto;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .quote-container.visible {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Card style */
+        .card {
+            background-color: #333;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            margin: 20px auto;
+            max-width: 300px;
+        }
+
+        .card img {
+            border-radius: 15px;
+        }
+
+        /* Background heart animation */
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+        }
+
+        .heart {
+            position: absolute;
+            bottom: 0;
+            width: 20px;
+            height: 20px;
+            background-color: #e50914;
+            transform: rotate(-45deg);
+            animation: float 5s infinite;
+        }
+
+        .heart:before,
+        .heart:after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #e50914;
+            border-radius: 50%;
+        }
+
+        .heart:before {
+            top: -10px;
+            left: 0;
+        }
+
+        .heart:after {
+            top: 0;
+            left: 10px;
+        }
+
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .hearts-container .heart {
+            left: 50%;
+            opacity: 0;
+            transform: translateX(-50%) rotate(-45deg);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Happy Monthsary, Misis Layson ko!</h1>
+    </div>
+
+    <div class="container">
+        <div class="message">
+            <p>Happy Monthsary, my love! ❤️</p>
+            <p>As I sit here thinking about you, I am overwhelmed with gratitude and love. Even though we are miles apart, you are always close to my heart. Your love and support mean everything to me, and I am so thankful to have you in my life.</p>
+            <p>Every day, I am reminded of how lucky I am to have found someone as amazing as you. You bring so much joy, light, and love into my life, and I can’t imagine my world without you. The distance between us is just a temporary challenge, and I know we will come out stronger and closer because of it.</p>
+            <p>I cherish all the memories we have created together, and I look forward to making many more in the future. Thank you for being my partner, my best friend, and my love. You are my everything, and I can't wait to spend many more months and years celebrating our love.</p>
+            <p>Until we can be together, know that I am always thinking of you and loving you with all my heart.</p>
+            <p>Yours forever,</p>
+            <p>Your-soon-to-be Husband! <span class="heart">❤️</span></p>
+        </div>
+
+        <button class="heart-button" onclick="showRandomQuote()">❤️ Click for a Surprise ❤️</button>
+        <div class="quote-container" id="quote-container">
+            <div class="quote" id="quote"></div>
+        </div>
+
+        <div class="slideshow-container">
+            <div class="mySlides card">
+                <img src="img/image1.jpg" alt="Image 1">
+            </div>
+            <div class="mySlides card">
+                <img src="img/image2.jpg" alt="Image 2">
+            </div>
+            <div class="mySlides card">
+                <img src="img/image3.jpg" alt="Image 3">
+            </div>
+            <div class="mySlides card">
+              <img src="img/image4.jpg" alt="Image 4">
+            </div>
+            <div class="mySlides card">
+              <img src="img/image5.jpg" alt="Image 5">
+            </div>
+            <div class="mySlides card">
+              <img src="img/image6.jpg" alt="Image 6">
+            </div>
+            <div class="mySlides card">
+              <img src="img/image7.jpg" alt="Image 7">
+            </div>
+            <div class="mySlides card">
+              <img src="img/image8.jpg" alt="Image 8">
+            </div>
+            <div class="mySlides card">
+              <img src="img/image9.jpg" alt="Image 9">
+            </div>
+            <div class="mySlides card">
+              <img src="img/image10.jpg" alt="Image 10">
+            </div>
+            <div class="mySlides card">
+              <img src="img/image11.jpg" alt="Image 11">
+            </div>
+            <div class="mySlides card">
+              <img src="img/image12.jpg" alt="Image 12">
+            </div>
+            <div class="mySlides card">
+              <img src="img/image13.jpg" alt="Image 13">
+            </div>
+            <div class="mySlides card">
+              <img src="img/image14.jpg" alt="Image 14">
+            </div>
+            <!-- Add more images as needed -->
+        </div>
+
+        <div class="dots">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <!-- Add more dots as needed -->
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Made with ❤️ by Your-soon-to-be Husband!</p>
+        <p>Looking forward to many more months and years with you!</p>
+    </div>
+
+    <div class="hearts-container">
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+    </div>
+
+    <script>
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}    
+
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+
+            slides[slideIndex - 1].style.display = "block";  
+            dots[slideIndex - 1].className += " active";
+
+            setTimeout(showSlides, 3000); // Change image every 3 seconds
+        }
+
+        const quotes = [
+            "Love is not about how many days, months, or years you have been together. Love is about how much you love each other every single day.",
+            "Distance means so little when someone means so much.",
+            "The best thing to hold onto in life is each other.",
+            "Every moment spent with you is like a beautiful dream come true.",
+            "True love stories never have endings."
+        ];
+
+        function showRandomQuote() {
+            const quoteContainer = document.getElementById('quote-container');
+            const quoteElement = document.getElementById('quote');
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            quoteElement.textContent = randomQuote;
+            quoteContainer.classList.add('visible');
+        }
+
+        function createHearts() {
+            const container = document.querySelector('.hearts-container');
+            for (let i = 0; i < 100; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.animationDuration = `${Math.random() * 5 + 2}s`;
+                heart.style.animationDelay = `${Math.random() * 2}s`;
+                container.appendChild(heart);
+            }
+        }
+
+        createHearts();
+    </script>
+
+</body>
+</html>
